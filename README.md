@@ -309,7 +309,7 @@ Le projet a pour objectifs de :
 ### Liens
 
 * **GitHub :** [naziha-goubaa](https://github.com/naziha-goubaa)
-* **LinkedIn :** [naziha-goubaa](linkedin.com/in/naziha-goubaa-a04b71266)
+* **LinkedIn :** [naziha-goubaa](https://linkedin.com/in/naziha-goubaa-a04b71266)
 
 ---
 
