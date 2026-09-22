@@ -1,93 +1,81 @@
 # CFSCMS — Système de Gestion des Hébergements
 
-Plateforme web et mobile de gestion des hébergements étudiants du **Centre de Formation en Construction Métallique et Soudure Mednine**.
+> Application web et mobile de gestion des hébergements étudiants du **Centre de Formation en Construction Métallique et Soudure de Médenine (CFSCMS)**.
+
+##  Description
+
+**Gestion Hébergement** est une application multiplateforme développée avec **Flutter** permettant à l'administration du CFSCMS de gérer les étudiants, les formations, les demandes d'hébergement, les chambres et les paiements.
+
+L'application propose deux interfaces principales :
+
+* **Interface administrateur Web** : gestion centralisée des étudiants, formations, hébergements, chambres, paiements et notifications.
+* **Interface étudiant mobile** : soumission de demandes d'hébergement, consultation des paiements, de la formation et du profil.
+
+Les données sont synchronisées en temps réel grâce à **Firebase Authentication** et **Cloud Firestore**.
 
 ---
 
-## Table des matières
+##  Technologies utilisées
 
-1. [Description](#description)
-2. [Technologies utilisées](#technologies-utilisées)
-3. [Fonctionnalités](#fonctionnalités)
-4. [Architecture du projet](#architecture-du-projet)
-5. [Prérequis](#prérequis)
-6. [Installation](#installation)
-7. [Configuration Firebase](#configuration-firebase)
-8. [Lancer l'application](#lancer-lapplication)
-9. [Créer le compte administrateur](#créer-le-compte-administrateur)
-10. [Déploiement Web (Firebase Hosting)](#déploiement-web-firebase-hosting)
-11. [Build Android (APK)](#build-android-apk)
-12. [Règles de sécurité Firestore](#règles-de-sécurité-firestore)
-13. [Mise à jour de l'application](#mise-à-jour-de-lapplication)
-
----
-
-## Description
-
-Application Flutter multi-plateforme (web + Android) permettant à l'administration du CFSCMS de gérer les demandes d'hébergement, les paiements, les formations et les étudiants. Les étudiants disposent d'une interface mobile pour soumettre leurs demandes et consulter leurs paiements en temps réel.
+| Technologie                 | Utilisation                                   |
+| --------------------------- | --------------------------------------------- |
+| **Flutter**                 | Développement de l'application Web et Android |
+| **Dart**                    | Langage de programmation                      |
+| **Firebase Authentication** | Authentification des utilisateurs             |
+| **Cloud Firestore**         | Stockage et synchronisation des données       |
+| **Firebase Hosting**        | Hébergement de la version Web                 |
+| **Provider**                | Gestion de l'état de l'application            |
+| **Google Fonts**            | Gestion de la typographie                     |
+| **PDF / Printing**          | Génération et impression de documents PDF     |
+| **Image Picker**            | Sélection des photos de profil                |
+| **URL Launcher**            | Ouverture de liens et envoi d'e-mails         |
+| **Internationalization**    | Formatage des dates                           |
 
 ---
 
-## Technologies utilisées
+##  Fonctionnalités
 
-| Technologie | Version | Rôle |
-|---|---|---|
-| Flutter | SDK ^3.11.0 | Framework UI (web + Android) |
-| Dart | ^3.11.0 | Langage de programmation |
-| Firebase Auth | ^6.5.2 | Authentification |
-| Cloud Firestore | ^6.5.0 | Base de données temps réel |
-| Firebase Hosting | — | Hébergement du site web |
-| Provider | ^6.1.5 | Gestion d'état |
-| Google Fonts | ^8.1.0 | Typographie (Poppins) |
-| PDF / Printing | ^3.11.0 / ^5.13.1 | Génération et impression de documents |
-| Image Picker | ^1.2.2 | Photo de profil étudiant |
-| URL Launcher | ^6.3.1 | Envoi d'e-mails depuis l'app |
-| Intl | ^0.20.2 | Formatage des dates |
+###  Interface Administrateur — Web
 
----
+| Module                     | Fonctionnalités                                                                   |
+| -------------------------- | --------------------------------------------------------------------------------- |
+| **Tableau de bord**        | Statistiques en temps réel : étudiants, hébergements, paiements et chambres       |
+| **Gestion des étudiants**  | Ajout, modification, suppression, export PDF et envoi des identifiants par e-mail |
+| **Gestion des formations** | Gestion des formations, groupes, capacités et occupation                          |
+| **Demandes d'hébergement** | Consultation, approbation/rejet et calcul automatique de la distance              |
+| **Gestion des chambres**   | Gestion des blocs A/B, occupation et liste des occupants                          |
+| **Paiements**              | Suivi des inscriptions, hébergements et mensualités, avec génération de reçus PDF |
+| **Notifications**          | Envoi de notifications aux étudiants et partage par e-mail                        |
 
-## Fonctionnalités
+###  Interface Étudiant — Mobile
 
-### Interface Administrateur (Web)
+| Module                    | Fonctionnalités                                                                      |
+| ------------------------- | ------------------------------------------------------------------------------------ |
+| **Demande d'hébergement** | Soumission d'une demande, consultation du statut et génération d'une attestation PDF |
+| **Mes paiements**         | Consultation des paiements en attente ou payés et génération des reçus PDF           |
+| **Ma formation**          | Consultation de la formation et du groupe                                            |
+| **Mon profil**            | Consultation des informations personnelles                                           |
 
-| Module | Fonctionnalités |
-|---|---|
-| **Tableau de bord** | Statistiques temps réel : étudiants, hébergements, paiements, chambres |
-| **Gestion des étudiants** | Ajout, modification, suppression, export PDF fiche étudiant, envoi e-mail identifiants |
-| **Gestion des formations** | Formations, groupes, capacités, occupation en temps réel |
-| **Demandes d'hébergement** | Consultation, approbation / rejet, calcul distance automatique |
-| **Gestion des chambres** | Blocs A/B, occupation en temps réel, liste des occupants |
-| **Paiements** | Suivi inscription, hébergement, mensualités ; marquer comme payé ; export reçu PDF |
-| **Notifications** | Envoi de notifications aux étudiants + partage par e-mail |
+###  Fonctionnalités communes
 
-### Interface Étudiant (Mobile)
-
-| Module | Fonctionnalités |
-|---|---|
-| **Demande d'hébergement** | Soumission de demande, consultation du statut, export PDF attestation |
-| **Mes paiements** | Liste des paiements (en attente / payés), export reçu PDF |
-| **Ma formation** | Consultation de la formation et du groupe |
-| **Mon profil** | Informations personnelles |
-
-### Fonctionnalités communes
-
-- Connexion sécurisée (Firebase Auth)
-- Réinitialisation du mot de passe par e-mail
-- Mises à jour en temps réel (Firestore streams)
-- Génération de PDF (reçus, fiches, attestations)
+* Authentification avec Firebase Authentication
+* Réinitialisation du mot de passe par e-mail
+* Synchronisation des données en temps réel avec Cloud Firestore
+* Génération de documents PDF
+* Gestion des rôles administrateur et étudiant
 
 ---
 
-## Architecture du projet
+##  Architecture du projet
 
-```
+```text
 lib/
 ├── core/
-│   ├── constants/        # AppConstants (noms, collections Firestore)
-│   ├── theme/            # AppColors, thème global
-│   └── utils/            # Utilitaires (dialogs, etc.)
+│   ── constants/       # Constantes de l'application
+│   ├── theme/           # Thème global
+│   └── utils/           # Utilitaires
 │
-├── models/               # Modèles de données
+├── models/              # Modèles de données
 │   ├── etudiant_model.dart
 │   ├── formation_model.dart
 │   ├── hebergement_model.dart
@@ -96,20 +84,17 @@ lib/
 │   ├── notification_model.dart
 │   └── user_model.dart
 │
-├── providers/
-│   └── auth_provider.dart        # État d'authentification global
+├── providers/           # Gestion de l'état
+│   └── auth_provider.dart
 │
-├── services/
-│   ├── auth_service.dart         # Firebase Auth
-│   ├── firestore_service.dart    # Toutes les opérations Firestore
-│   └── database_seeder.dart      # Données de démonstration
+├── services/            # Services applicatifs
+│   ├── auth_service.dart
+│   ├── firestore_service.dart
+│   └── database_seeder.dart
 │
 ├── screens/
 │   ├── auth/
-│   │   ├── login_screen.dart
-│   │   └── register_screen.dart
 │   ├── admin/
-│   │   ├── admin_layout.dart     # Shell admin (sidebar + contenu)
 │   │   ├── dashboard/
 │   │   ├── etudiants/
 │   │   ├── formations/
@@ -117,120 +102,128 @@ lib/
 │   │   ├── chambres/
 │   │   ├── paiements/
 │   │   └── notifications/
+│   │
 │   └── etudiant/
 │       ├── hebergement/
 │       ├── paiement/
 │       └── formation/
 │
 └── widgets/
-    ├── admin/            # AdminSidebar
-    └── common/           # PremiumCard, StatusBadge, LoadingOverlay
+    ├── admin/
+    └── common/
 ```
 
 ### Collections Firestore
 
-| Collection | Description |
-|---|---|
-| `utilisateurs` | Comptes utilisateurs (admin + étudiants) |
-| `etudiants` | Fiches étudiants complètes |
-| `formations` | Formations disponibles |
-| `groupes` | Sous-groupes de formation |
-| `hebergements` | Demandes d'hébergement |
-| `chambres` | Chambres (Bloc A / Bloc B) |
-| `paiements` | Tous les paiements (inscription, hébergement, mensualités) |
-| `notifications` | Notifications envoyées aux étudiants |
+| Collection      | Description                                           |
+| --------------- | ----------------------------------------------------- |
+| `utilisateurs`  | Comptes utilisateurs : administrateurs et étudiants   |
+| `etudiants`     | Informations des étudiants                            |
+| `formations`    | Formations disponibles                                |
+| `groupes`       | Groupes de formation                                  |
+| `hebergements`  | Demandes d'hébergement                                |
+| `chambres`      | Chambres et occupants                                 |
+| `paiements`     | Paiements d'inscription, d'hébergement et mensualités |
+| `notifications` | Notifications destinées aux étudiants                 |
 
 ---
 
-## Prérequis
+##  Prérequis
 
-- [Flutter](https://flutter.dev/docs/get-started/install) SDK >= 3.11.0
-- [Dart](https://dart.dev) SDK >= 3.11.0
-- Un projet [Firebase](https://console.firebase.google.com) configuré
-- [Node.js](https://nodejs.org) (pour Firebase CLI)
-- Firebase CLI : `npm install -g firebase-tools`
+Avant d'utiliser le projet, installer :
 
----
+* **Flutter** ≥ 3.11.0
+* **Dart** ≥ 3.11.0
+* **Node.js**
+* **Firebase CLI**
+* Un projet **Firebase** configuré
 
-## Installation
+Installation de Firebase CLI :
 
 ```bash
-# Aller dans le dossier du projet
-cd gestion_hebergement
+npm install -g firebase-tools
+```
 
-# Installer les dépendances Flutter
+---
+
+##  Installation
+
+### 1. Cloner le projet
+
+```bash
+git clone https://github.com/naziha-goubaa/gestion-hebergement.git
+cd gestion-hebergement
+```
+
+### 2. Installer les dépendances
+
+```bash
 flutter pub get
 ```
 
 ---
 
-## Configuration Firebase
+##  Configuration Firebase
 
-Le projet est déjà configuré avec le projet Firebase `gestion-hebergement` via `lib/firebase_options.dart`.
+Le projet utilise **Firebase Authentication** et **Cloud Firestore**.
 
-Si vous utilisez un nouveau projet Firebase :
+La configuration Firebase est définie dans :
+
+```text
+lib/firebase_options.dart
+```
+
+Pour utiliser un autre projet Firebase :
 
 ```bash
-# Installer la CLI FlutterFire
 dart pub global activate flutterfire_cli
-
-# Configurer pour votre projet
 flutterfire configure
 ```
 
-Activez dans la console Firebase :
-- **Authentication** → méthode **E-mail / Mot de passe**
-- **Firestore Database** → créer en mode production
+Dans Firebase Console, activer notamment :
+
+* **Authentication → E-mail / Mot de passe**
+* **Cloud Firestore**
+
+>  Ne jamais publier dans le dépôt des fichiers contenant des clés privées, mots de passe, certificats ou autres secrets destinés à rester confidentiels.
 
 ---
 
-## Lancer l'application
+##  Lancer l'application
+
+### Version Web
 
 ```bash
-# Version web (navigateur Chrome)
 flutter run -d chrome
+```
 
-# Version Android (émulateur ou appareil connecté)
+### Version Android
+
+```bash
 flutter run -d android
+```
 
-# Lister les appareils disponibles
+### Vérifier les appareils disponibles
+
+```bash
 flutter devices
 ```
 
 ---
 
-## Créer le compte administrateur
+##  Déploiement Web avec Firebase Hosting
 
-> Le lien "Créer un compte" est activé temporairement pour cette étape.
-> Il doit être désactivé avant tout déploiement en production.
-
-### Étape 1 — Créer le compte via l'application
-
-1. Lancez l'application (`flutter run -d chrome`)
-2. Sur la page de connexion, cliquez **"Créer un compte"**
-3. Remplissez le formulaire avec les informations réelles de l'administrateur
-4. Validez — le compte est créé dans Firebase Auth + Firestore automatiquement
-
-### Étape 2 — Désactiver le lien d'inscription
-
-Dans `lib/screens/auth/login_screen.dart`, commentez le bloc du lien d'inscription
-et supprimez l'import `register_screen.dart` (ou commentez-le).
-
-### Pour créer un compte supplémentaire à l'avenir
-
-Décommentez temporairement le lien → créez le compte → recommentez → redéployez.
-
----
-
-## Déploiement Web (Firebase Hosting)
-
-### 1. Builder l'application
+### 1. Construire la version Web
 
 ```bash
-flutter build web --release --web-renderer canvaskit
+flutter build web --release
 ```
 
-Les fichiers statiques sont générés dans `build/web/`.
+Les fichiers générés se trouvent dans :
+
+```text
+build/web/
+```
 
 ### 2. Se connecter à Firebase
 
@@ -244,192 +237,82 @@ firebase login
 firebase deploy --only hosting
 ```
 
-L'URL publique s'affiche à la fin :
-```
-Hosting URL: https://gestion-hebergement.web.app
-```
-
-### Pour les mises à jour
-
-```bash
-flutter build web --release --web-renderer canvaskit
-firebase deploy --only hosting
-```
-
-L'URL reste identique à chaque redéploiement.
+L'URL de déploiement dépend de la configuration Firebase du projet.
 
 ---
 
-## Build Android (APK)
+##  Générer l'APK Android
 
-### 1. Créer la clé de signature (une seule fois)
-
-```bash
-keytool -genkey -v -keystore cfscms-release.jks \
-  -keyalg RSA -keysize 2048 -validity 10000 -alias cfscms
-```
-
-> **Conservez ce fichier `.jks` et son mot de passe en lieu sûr.**
-> Sans lui, il est impossible de mettre à jour l'APK sur les appareils existants.
-
-### 2. Configurer la signature
-
-Créez `android/key.properties` :
-
-```properties
-storePassword=VOTRE_MOT_DE_PASSE
-keyPassword=VOTRE_MOT_DE_PASSE
-keyAlias=cfscms
-storeFile=../../cfscms-release.jks
-```
-
-Dans `android/app/build.gradle`, ajoutez avant `android {` :
-
-```gradle
-def keystoreProperties = new Properties()
-def keystorePropertiesFile = rootProject.file('key.properties')
-if (keystorePropertiesFile.exists()) {
-    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
-}
-```
-
-Et dans `buildTypes` :
-
-```gradle
-signingConfigs {
-    release {
-        keyAlias keystoreProperties['keyAlias']
-        keyPassword keystoreProperties['keyPassword']
-        storeFile keystoreProperties['storeFile'] ? file(keystoreProperties['storeFile']) : null
-        storePassword keystoreProperties['storePassword']
-    }
-}
-buildTypes {
-    release {
-        signingConfig signingConfigs.release
-        minifyEnabled true
-        shrinkResources true
-    }
-}
-```
-
-### 3. Générer l'APK
+Pour générer une version de production :
 
 ```bash
 flutter build apk --release
 ```
 
-APK produit : `build/app/outputs/flutter-apk/app-release.apk`
+Le fichier APK est généré dans :
 
-Distribuez ce fichier aux étudiants (clé USB, e-mail, lien de téléchargement).
-
----
-
-## Règles de sécurité Firestore
-
-Publiez ces règles dans **Firebase Console → Firestore → Rules** :
-
-```javascript
-rules_version = '2';
-service cloud.firestore {
-  match /databases/{database}/documents {
-
-    function isAuth() { return request.auth != null; }
-    function isAdmin() {
-      return isAuth() &&
-        get(/databases/$(database)/documents/utilisateurs/$(request.auth.uid))
-          .data.role == 'administrateur';
-    }
-
-    match /utilisateurs/{uid} {
-      allow read: if request.auth.uid == uid || isAdmin();
-      allow write: if isAdmin();
-    }
-
-    match /etudiants/{docId} {
-      allow read: if isAdmin() ||
-        (isAuth() && resource.data.userId == request.auth.uid);
-      allow write: if isAdmin();
-    }
-
-    match /formations/{docId}  { allow read: if isAuth(); allow write: if isAdmin(); }
-    match /groupes/{docId}     { allow read: if isAuth(); allow write: if isAdmin(); }
-    match /chambres/{docId}    { allow read: if isAuth(); allow write: if isAdmin(); }
-
-    match /hebergements/{docId} {
-      allow read: if isAdmin() ||
-        (isAuth() && resource.data.etudiantId == request.auth.uid);
-      allow create: if isAuth() &&
-        request.resource.data.etudiantId == request.auth.uid &&
-        request.resource.data.statut == 'En attente';
-      allow update, delete: if isAdmin();
-    }
-
-    match /paiements/{docId} {
-      allow read: if isAdmin() ||
-        (isAuth() && resource.data.etudiantId == request.auth.uid);
-      allow write: if isAdmin();
-    }
-
-    match /notifications/{docId} {
-      allow read: if isAdmin() ||
-        (isAuth() && resource.data.etudiantId == request.auth.uid);
-      allow write: if isAdmin();
-    }
-
-    match /fichesEtudiants/{docId} { allow read, write: if isAdmin(); }
-    match /etats/{docId}           { allow read: if isAuth(); allow write: if isAdmin(); }
-  }
-}
+```text
+build/app/outputs/flutter-apk/app-release.apk
 ```
 
----
+### Signature de l'application
 
-## Mise à jour de l'application
-
-### Web
-
-```bash
-flutter build web --release --web-renderer canvaskit
-firebase deploy --only hosting
-```
-
-### Android
-
-```bash
-# Incrémenter la version dans pubspec.yaml (ex: 1.0.0+1 → 1.0.1+2)
-flutter build apk --release
-# Redistribuer le nouvel APK aux étudiants
-```
+Pour une publication Android en production, une clé de signature doit être conservée dans un emplacement sécurisé et **ne doit pas être publiée sur GitHub**.
 
 ---
 
-## Checklist mise en production
+##  Sécurité Firestore
 
-- [ ] Compte admin créé via la page d'inscription
-- [ ] Lien "Créer un compte" désactivé dans le code
-- [ ] Règles Firestore publiées dans Firebase Console
-- [ ] `flutter analyze` sans erreurs
-- [ ] Build web réussi (`flutter build web --release`)
-- [ ] Déploiement Firebase Hosting effectué
-- [ ] Test de connexion admin sur l'URL publique
-- [ ] APK Android généré et distribué aux étudiants
-- [ ] Test de connexion étudiant sur mobile
-- [ ] Fichier `cfscms-release.jks` sauvegardé en lieu sûr
+L'accès aux données est contrôlé par les règles de sécurité **Cloud Firestore**.
 
----
+Le principe général est :
 
-## Informations du projet Firebase
+* les utilisateurs authentifiés peuvent accéder aux données autorisées ;
+* les étudiants peuvent consulter leurs propres informations ;
+* les opérations d'administration sont réservées aux utilisateurs disposant du rôle administrateur.
 
-| Paramètre | Valeur |
-|---|---|
-| Project ID | `gestion-hebergement` |
-| Android App ID | `1:730914223626:android:48150dd2ec3e025910d1f3` |
-| Web App ID | `1:730914223626:web:d62f65aa9e45d21210d1f3` |
-| Hosting public dir | `build/web` |
-| URL déployée | `https://gestion-hebergement.web.app` |
+Les règles Firestore doivent être configurées et vérifiées dans :
+
+**Firebase Console → Firestore Database → Rules**
 
 ---
 
-*CFSCMS — Centre de Formation en Construction Métallique et Soudure Mednine*
-*Version 1.0.0 — Flutter 3.11 + Firebase*
+##  Documentation
+
+La documentation du projet est disponible dans le dossier [`docs/`](docs/) :
+
+*  [Rapport du projet](docs/Rapport.pdf)
+*  [Scénario](docs/Scenario.pdf)
+
+---
+
+##  Objectifs du projet
+
+Le projet a pour objectifs de :
+
+* digitaliser la gestion des hébergements étudiants ;
+* centraliser les informations relatives aux étudiants ;
+* faciliter le suivi des paiements ;
+* simplifier la gestion des chambres et des demandes ;
+* fournir une interface adaptée aux administrateurs et aux étudiants ;
+* mettre en œuvre une architecture multiplateforme avec Flutter ;
+* utiliser Firebase pour l'authentification et la gestion des données.
+
+---
+
+##  Auteur
+
+**Naziha Goubaa**
+
+Étudiante en informatique — Développement logiciel et mobile
+
+### Liens
+
+* **GitHub :** [naziha-goubaa](https://github.com/naziha-goubaa)
+* **LinkedIn :** [naziha-goubaa](linkedin.com/in/naziha-goubaa-a04b71266)
+
+---
+
+##  Licence
+
+Projet réalisé dans un cadre académique et professionnel.
