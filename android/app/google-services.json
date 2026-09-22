@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "730914223626",
+    "project_id": "gestion-hebergement",
+    "storage_bucket": "gestion-hebergement.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:730914223626:android:48150dd2ec3e025910d1f3",
+        "android_client_info": {
+          "package_name": "com.cftba.gestion_hebergement"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCCJ7wxbZja6LqCAcHyuwHDtx88Y3WEFzc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

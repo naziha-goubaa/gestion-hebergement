@@ -1,0 +1,8 @@
+{
+  "projects": {
+    "staging": "gestion-hebergement",
+    "default": "gestion-hebergement"
+  },
+  "targets": {},
+  "etags": {}
+}
